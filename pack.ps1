@@ -34,5 +34,20 @@ if (Test-Path "$PSScriptRoot/password.txt") {
 }
 
 # 阻塞運行
-Start-Process -FilePath WinRAR -ArgumentList "a ${file} *.patch -m5 ${h} -T" -NoNewWindow -Wait
+$process = Start-Process -FilePath WinRAR -ArgumentList "a ${file} *.patch -m5 ${h} -T" -NoNewWindow -Wait -PassThru
+Write-Output $process.ExitCode # 進程返回值
+if ($process.ExitCode -ne 0) {
+    Write-Output "壓縮失敗"
+    exit 1
+}
 Remove-Item *.patch
+
+# 打包後複製到指定位置
+$config = "$PSScriptRoot/config.json"
+if (Test-Path $config) {
+    $json = Get-Content $config -Raw | ConvertFrom-Json
+    if ($json.path -and (Test-Path $json.path)) {
+        Write-Output ("複製到" + $json.path)
+        Copy-Item -Path *.rar -Destination $json.path
+    }
+}
