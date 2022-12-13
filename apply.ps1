@@ -1,3 +1,6 @@
+# 导入rar命令
+common.ps1
+
 $path = ""
 $json = get_config
 if ($json -and $json.path -and (Test-Path $json.path)) {
@@ -20,9 +23,6 @@ $file = Get-Path
 if ($file -eq "") {
     $file = "file"
 }
-
-# 导入rar命令
-common.ps1
 
 # 獲取密碼
 $h = get_password
@@ -54,6 +54,8 @@ if ($args.Contains("-i"))
 {
     $am = $am + " --ignore-date"
 }
+
+$patch = Get-ChildItem *.patch
 
 $r = Start-Process -FilePath git -ArgumentList "${am} ${patch}" -NoNewWindow -Wait -PassThru
 Write-Output $r.ExitCode
