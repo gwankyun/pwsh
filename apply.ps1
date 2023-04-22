@@ -45,7 +45,7 @@ if (-not (Test-Path *.patch)) {
 
 $am = "am"
 
-if ($args.Contains("-3"))
+if ($args.Contains("-3") -or ($file -eq "sm18-lazy-package"))
 {
     $am = $am + " --3way --ignore-space-change --keep-cr"
 }
