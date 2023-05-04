@@ -1,4 +1,4 @@
-# 导入rar命令
+﻿# 导入rar命令
 common.ps1
 
 $path = ""
@@ -7,6 +7,12 @@ if ($json -and $json.path -and (Test-Path $json.path)) {
     $path = $json.path
 }
 Write-Output ("path: " + $path)
+
+# 是否重置時間
+[bool]$ignore_date = $false
+if ($json -and $null -ne $json.ignore_date) {
+    $ignore_date = $json.ignore_date
+}
 
 $patch = Get-ChildItem *.patch
 
@@ -50,7 +56,7 @@ if ($args.Contains("-3") -or ($file -eq "sm18-lazy-package"))
     $am = $am + " --3way --ignore-space-change --keep-cr"
 }
 
-if ($args.Contains("-i"))
+if ($args.Contains("-i") -or $ignore_date)
 {
     $am = $am + " --ignore-date"
 }
