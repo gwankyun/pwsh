@@ -22,9 +22,6 @@ function global:get_config {
     $json = $null
     if (Test-Path $config) {
         $json = Get-Content $config -Raw | ConvertFrom-Json
-        # if ($json.path -and (Test-Path $json.path)) {
-        #     $path = $json.path
-        # }
     }
     return $json
 }
