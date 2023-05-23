@@ -37,8 +37,9 @@ $h = get_password
 if ($patch.Length -eq 0)
 {
     if ($path -ne "") {
-        if (winrar_expand ($path + $file) $h -ne 0) {
-            Write-Output "解壓失敗"
+        Rar x ($path + $file) $h
+        if ($LASTEXITCODE -ne 0) {
+            Write-Output "解縮失敗"
             exit 1
         }
     }
