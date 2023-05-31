@@ -1,14 +1,12 @@
 common.ps1
 
-$requirements = "./requirements.txt"
-$all_packet = "./all-packet"
+$requirements = "./python/requirements.txt"
+$all_packet = "./python/all-packet"
 $output = "./python.zip"
 
 remove-test-item ./python/all-packet
 
 remove-test-item ./python/requirements.txt
-
-Set-Location ./python
 
 python -m pip freeze > $requirements
 
@@ -35,7 +33,5 @@ if ($LASTEXITCODE -ne 0) {
     Write-Output "Compress-Archive"
     exit 1
 }
-
-Set-Location ..
 
 exit 0
