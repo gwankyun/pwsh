@@ -4,9 +4,13 @@ $requirements = "./python/requirements.txt"
 $all_packet = "./python/all-packet"
 $output = "./python.zip"
 
-remove-test-item ./python/all-packet
+remove-any $all_packet
 
-remove-test-item ./python/requirements.txt
+remove-any $requirements
+
+remove-any $output
+
+# remove-any ./python/requirements.txt
 
 python -m pip freeze > $requirements
 

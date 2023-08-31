@@ -30,6 +30,15 @@ function global:remove-test-item([string]$path) {
     }
 }
 
+function global:remove-any([string]$path) {
+    if (Test-Path $path -PathType Container) {
+        Remove-Item $path -Recurse
+    }
+    elseif (Test-Path $path) {
+        Remove-Item $path
+    }
+}
+
 function global:get_password {
     if (Test-Path "$PSScriptRoot/password.txt") {
         $pw = Get-Content "$PSScriptRoot/password.txt"

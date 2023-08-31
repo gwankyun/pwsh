@@ -8,9 +8,9 @@ if (-not (Test-Path ./python.zip)) {
 $requirements = "./python/requirements.txt"
 $all_packet = "./python/all-packet"
 
-remove-test-item $all_packet
+remove-any $all_packet
 
-remove-test-item $requirements
+remove-any $requirements
 
 $r = Expand-Archive ./python.zip -DestinationPath ./python -PassThru
 Write-Output $r
