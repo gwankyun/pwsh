@@ -30,7 +30,7 @@ if (-not (Test-Path $zip -PathType Leaf))
 }
 
 # 解壓文件
-Expand-Archive $zip -DestinationPath $dest
+Expand-Archive $zip -DestinationPath $dest -Force
 
 $delete = Join-Path $path "delete.txt"
 

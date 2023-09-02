@@ -1,16 +1,8 @@
 $num = -1
 $pw = ""
 
-function Get-Path {
-    $path = (Get-Location).Path.ToString()
-    $idx = $path.LastIndexOf("\")
-    if ($idx -eq -1) {
-        return ""
-    }
-    $file = $path.Substring($idx + 1)
-    return $file
-}
-$file = Get-Path
+$file = Split-Path $PWD -Leaf
+
 if ($file -eq "") {
     $file = "file"
 }
