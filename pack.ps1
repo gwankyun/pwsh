@@ -15,12 +15,11 @@ if ($args.Count -ge 2) {
 }
 Remove-Item *.patch
 git format-patch $num
-if (Test-Path ($file + ".rar")) {
-    Remove-Item ($file + ".rar")
-}
 
 # 导入rar命令
 common.ps1
+
+remove ($file + ".rar")
 
 # 獲取密碼
 $h = get_password
