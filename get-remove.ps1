@@ -1,11 +1,13 @@
-﻿$path = $PWD
+﻿# 和刪除了哪些文件
+
+$path = $PWD
 
 if ($args.Length -lt 1)
 {
     exit 1
 }
 
-$set = $args[0]
+$set = $args[0] # 之前保存的狀態
 
 if ($args.Length -ge 2)
 {

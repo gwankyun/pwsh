@@ -1,12 +1,14 @@
-﻿$path = $PWD
+﻿# 複製給定日期後有修改的文件
+
+$path = $PWD
 
 if ($args.Length -lt 2)
 {
     exit 1
 }
 
-$date = $args[0]
-$target = $args[1]
+$date = $args[0] # 日期
+$target = $args[1] # 目標路徑
 
 $parent = (Get-Item $target).Parent
 

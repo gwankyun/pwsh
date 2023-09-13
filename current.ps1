@@ -1,4 +1,6 @@
-﻿# 默認當前目錄
+﻿# 返回當前狀態
+
+# 默認當前目錄
 $path = $PWD
 if ($args.Length -ge 1)
 {
@@ -9,7 +11,8 @@ $set = @{};
 Get-ChildItem -Path $path -Recurse
 | ForEach-Object {
     $isDir = $false
-    if (Test-Path $_.FullName -PathType Container) {
+    if (Test-Path $_.FullName -PathType Container)
+    {
         $isDir = $true
     }
     $set[$_.FullName] = $isDir

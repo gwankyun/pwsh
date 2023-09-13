@@ -5,7 +5,7 @@ if ($args.Length -lt 1)
     exit 1
 }
 
-$dest = $args[0]
+$dest = $args[0] # 目標路徑
 
 if (-not (Test-Path $dest -PathType Container))
 {
