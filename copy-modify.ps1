@@ -32,7 +32,8 @@ if (Test-Path $zip -PathType Leaf)
 }
 
 Get-ChildItem -Path $path -Recurse
-| Where-Object { $_.LastWriteTime -gt [datetime]$date }
+# | Where-Object { $_.LastWriteTime -gt [datetime]$date }
+| Where-Object { $_.LastWriteTime -gt $date }
 | ForEach-Object {
     $relative = [IO.Path]::GetRelativePath($pwd, $_.FullName)
     $dest = Join-Path $target $relative
