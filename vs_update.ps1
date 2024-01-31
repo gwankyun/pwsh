@@ -20,7 +20,7 @@ function vs_clean($buildtools, $layout) {
     $ret = 1
     $archive = Join-Path $layout "Archive"
     foreach ($i in (Get-ChildItem $archive)) {
-        $catalog = Join-Path $_ "Catalog.json"
+        $catalog = Join-Path $i "Catalog.json"
         if (Test-Path $catalog) {
             $r = Start-Process -FilePath $buildtools -ArgumentList "--layout $layout --clean $catalog" -NoNewWindow -Wait -PassThru
             $ret = $r.ExitCode
