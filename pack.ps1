@@ -24,7 +24,15 @@ remove ($file + ".rar")
 # 獲取密碼
 $h = get_password
 
-Rar a $file *.patch -m5 $h -t
+Write-Host "file: " $file
+
+$rar = $file
+
+if ($rar.Contains(".")) {
+    $rar = $rar + ".rar"
+}
+
+Rar a $rar *.patch -m5 $h -t
 if ($LASTEXITCODE -ne 0) {
     Write-Output "壓縮失敗"
     exit 1
