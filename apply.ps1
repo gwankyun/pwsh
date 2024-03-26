@@ -21,6 +21,10 @@ if ($file -eq "") {
     $file = "file"
 }
 
+if ($file.Contains(".")) {
+    $file = $file + ".rar"
+}
+
 # 獲取密碼
 $h = get_password
 
@@ -55,14 +59,8 @@ if ($args.Contains("-i") -or $ignore_date)
 
 $patch = Get-ChildItem *.patch
 
-# $r = Start-Process -FilePath git -ArgumentList "${am} ${patch}" -NoNewWindow -Wait -PassThru
-# Write-Output $r.ExitCode
-
-git $am (Get-ChildItem *.patch)
-Write-Host $LASTEXITCODE
-if ($LASTEXITCODE -eq 0) {
-    Write-Host "合併成功"
-}
+$r = Start-Process -FilePath git -ArgumentList "${am} ${patch}" -NoNewWindow -Wait -PassThru
+Write-Output $r.ExitCode
 
 # 暫停一秒
 Start-Sleep -Seconds 1
