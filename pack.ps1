@@ -61,7 +61,7 @@ if ($json -and $json.path -and (Test-Path $json.path)) {
     }
 
     Write-Output ("複製到" + $json.path)
-    Remove-Item -Path *.rar
+    Remove-Item -Path *.zip
     if ($LASTEXITCODE -ne 0) {
         Write-Output "刪除失敗"
     }

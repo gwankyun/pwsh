@@ -21,10 +21,6 @@ if ($file -eq "") {
     $file = "file"
 }
 
-if ($file.Contains(".")) {
-    $file = $file + ".zip"
-}
-
 # 獲取密碼
 $h = get_password
 
@@ -33,9 +29,14 @@ if ($patch.Length -eq 0)
 {
     if ($path -ne "") {
         # Rar x ($path + $file) $h
-        Expand-Archive ($path + $file) -DestinationPath $PWD
+        $zip = $path + $file + ".zip"
+        if (-not (Test-Path ())) {
+            Write-Host $zip + " 不存在"
+            exit 1
+        }
+        Expand-Archive zip -DestinationPath $PWD
         if ($LASTEXITCODE -ne 0) {
-            Write-Host "解縮失敗"
+            Write-Host "解壓失敗"
             exit 1
         }
     }

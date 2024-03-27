@@ -1,5 +1,5 @@
-﻿$buildtools = ".\vs_BuildTools.exe"
-$layout = ".\build_tools\"
+﻿$buildtools = "..\vs_BuildTools.exe"
+$layout = ".\"
 
 if ($args.Length -ge 2) {
     $buildtools = $args[0]
