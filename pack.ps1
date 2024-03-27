@@ -19,7 +19,7 @@ git format-patch $num
 # 导入rar命令
 common.ps1
 
-remove ($file + ".rar")
+remove ($file + ".zip")
 
 # 獲取密碼
 $h = get_password
@@ -29,14 +29,21 @@ Write-Host "file: " $file
 $rar = $file
 
 if ($rar.Contains(".")) {
-    $rar = $rar + ".rar"
+    $rar = $rar + ".zip"
 }
 
-Rar a $rar *.patch -m5 $h -t
+# Rar a $rar *.patch -m5 $h -t
 if ($LASTEXITCODE -ne 0) {
     Write-Output "壓縮失敗"
     exit 1
 }
+
+$compress = @{
+    Path = Get-Item *.patch
+    DestinationPath = $rar
+    CompressionLevel = "Fastest"
+}
+Compress-Archive @compress
 
 Remove-Item *.patch
 if ($LASTEXITCODE -ne 0) {
@@ -47,7 +54,7 @@ if ($LASTEXITCODE -ne 0) {
 # 打包後複製到指定位置
 $json = get_config
 if ($json -and $json.path -and (Test-Path $json.path)) {
-    Copy-Item -Path *.rar -Destination $json.path
+    Copy-Item -Path *.zip -Destination $json.path
     if ($LASTEXITCODE -ne 0) {
         Write-Output "複製失敗"
         exit 1

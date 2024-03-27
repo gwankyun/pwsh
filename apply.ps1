@@ -22,7 +22,7 @@ if ($file -eq "") {
 }
 
 if ($file.Contains(".")) {
-    $file = $file + ".rar"
+    $file = $file + ".zip"
 }
 
 # 獲取密碼
@@ -32,7 +32,8 @@ $h = get_password
 if ($patch.Length -eq 0)
 {
     if ($path -ne "") {
-        Rar x ($path + $file) $h
+        # Rar x ($path + $file) $h
+        Expand-Archive ($path + $file) -DestinationPath $PWD
         if ($LASTEXITCODE -ne 0) {
             Write-Host "解縮失敗"
             exit 1
