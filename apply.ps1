@@ -30,15 +30,17 @@ if ($patch.Length -eq 0)
     if ($path -ne "") {
         # Rar x ($path + $file) $h
         $zip = $path + $file + ".zip"
-        if (-not (Test-Path ())) {
+        Write-Host "zip: $zip"
+        if (-not (Test-Path $zip)) {
             Write-Host $zip + " 不存在"
             exit 1
         }
-        Expand-Archive zip -DestinationPath $PWD
-        if ($LASTEXITCODE -ne 0) {
-            Write-Host "解壓失敗"
-            exit 1
-        }
+        Expand-Archive $zip -DestinationPath $PWD
+        Write-Host $LASTEXITCODE
+        # if ($LASTEXITCODE -ne 0) {
+        #     Write-Host "解壓失敗"
+        #     exit 1
+        # }
     }
 }
 
