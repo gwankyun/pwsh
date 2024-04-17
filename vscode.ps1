@@ -1,6 +1,6 @@
 ﻿Write-Host $args
 $a, $b = ($args[0]).Split(".")
-$ver = $args[1]
+$ver = ($args[1]).TrimStart("v")
 
 $url = "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/${a}/vsextensions/${b}/$ver/vspackage"
 
