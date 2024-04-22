@@ -68,3 +68,7 @@ function global:get_config {
     }
     return $json
 }
+
+function global:Get-RelativePath($parent, $child) {
+    return [IO.Path]::GetRelativePath($parent, $child)
+}
