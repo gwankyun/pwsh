@@ -5,7 +5,8 @@ function build($config) {
 }
 
 function install($config) {
-    gsudo cmake --build build --target install --config $config
+    # gsudo cmake --build build --target install --config $config
+    gsudo cmake --install build --config $config
 }
 
 function build_install_config($config, [ref]$r) {
