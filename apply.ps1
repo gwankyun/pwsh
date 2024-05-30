@@ -1,6 +1,8 @@
 ﻿# 导入rar命令
 common.ps1
 
+[Console]::OutputEncoding = [Text.Encoding]::UTF8
+
 $path = ""
 $json = get_config
 if ($json -and $json.path -and (Test-Path $json.path)) {
