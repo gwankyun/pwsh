@@ -1,16 +1,14 @@
-common.ps1
+﻿common.ps1
 
 $requirements = "./python/requirements.txt"
 $all_packet = "./python/all-packet"
 $output = "./python.zip"
 
-remove-any $all_packet
+Remove-AnyItem $all_packet
 
-remove-any $requirements
+Remove-AnyItem $requirements
 
-remove-any $output
-
-# remove-any ./python/requirements.txt
+Remove-AnyItem $output
 
 python -m pip freeze > $requirements
 
@@ -19,7 +17,8 @@ if ($LASTEXITCODE -ne 0) {
     exit 1
 }
 
-python -m pip download -d $all_packet -r $requirements
+# setuptools wheel也要下載
+python -m pip download -d $all_packet -r $requirements setuptools wheel
 
 if ($LASTEXITCODE -ne 0) {
     Write-Output "download"

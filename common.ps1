@@ -39,6 +39,15 @@ function global:remove-any([string]$path) {
     }
 }
 
+function global:Remove-AnyItem([string]$path) {
+    if (Test-Path $path -PathType Container) {
+        Remove-Item $path -Recurse
+    }
+    elseif (Test-Path $path) {
+        Remove-Item $path
+    }
+}
+
 function global:remove([string]$path)
 {
     if (Test-Path $path -PathType Container)
