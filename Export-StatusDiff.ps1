@@ -8,11 +8,11 @@ function Copy-Compare {
         [string]$creation_path,
         [PSCustomObject]$i
     )
-    # $creation_path = Join-Path $output "creation"
+    [string]$relative = $i.Relative
     if (-not (Test-Path $creation_path -PathType Container)) {
         New-Item -Path $creation_path -ItemType Directory -Force
     }
-    if ($i.PSIsContainer -eq $true) {
+    if ($i.PSIsContainer) {
         $path = Join-Path $creation_path $relative
         New-Item -Path $path -ItemType Directory -Force
     }
@@ -35,12 +35,12 @@ foreach ($i in $compare) {
         }
         "creation" {
             Write-Output "creation: $relative"
-            $creation_path = Join-Path $output "data"
+            $creation_path = Join-Path $output "data" -Resolve
             Copy-Compare $new $creation_path $i
         }
         "modification" {
             Write-Output "modification: $relative"
-            $modification_path = Join-Path $output "data"
+            $modification_path = Join-Path $output "data" -Resolve
             Copy-Compare $new $modification_path $i
         }
         default {
