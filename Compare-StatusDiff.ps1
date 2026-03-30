@@ -1,7 +1,9 @@
-﻿$old = $args[0]
-$new = $args[1]
+﻿param(
+    [PSCustomObject]$Old,
+    [PSCustomObject]$New
+)
 
-Compare-Object -ReferenceObject $old -DifferenceObject $new `
+Compare-Object -ReferenceObject $Old -DifferenceObject $New `
     -Property Relative, PSIsContainer, Length, LastWriteTime
 | Group-Object -Property Relative
 | ForEach-Object {

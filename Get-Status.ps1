@@ -1,14 +1,12 @@
-﻿$path = $PWD
+﻿param(
+    [string]$Path = $PWD
+)
 
-if ($args.Count -gt 0) {
-    $path = $args[0]
-}
+# $block = { $true }
 
-$block = { $true }
-
-if ($args.Count -gt 1) {
-    $block = $args[1]
-}
+# if ($args.Count -gt 1) {
+#     $block = $args[1]
+# }
 
 Get-ChildItem -Path $path -Recurse
 | Sort-Object FullName
@@ -22,4 +20,4 @@ Get-ChildItem -Path $path -Recurse
         LastWriteTime = $_.LastWriteTime.Ticks
     }
 }
-| Where-Object $block
+# | Where-Object $block
