@@ -34,6 +34,10 @@ function vs_verify($buildtools, $layout) {
     $r = Start-Process -FilePath $buildtools -ArgumentList "--layout $layout --verify" -NoNewWindow -Wait -PassThru
     return $r.ExitCode
 }
+function vs_fix($buildtools, $layout) {
+    $r = Start-Process -FilePath $buildtools -ArgumentList "--layout $layout --fix" -NoNewWindow -Wait -PassThru
+    return $r.ExitCode
+}
 
 $ret = vs_update $buildtools $layout
 if ($ret -ne 0) {
@@ -49,7 +53,7 @@ if ($ret -ne 0) {
 }
 Write-Output "刪除成功"
 
-$ret = vs_verify $buildtools $layout
+$ret = vs_fix $buildtools $layout
 if ($ret -ne 0) {
     Write-Output "驗證失敗"
     exit 1
