@@ -41,7 +41,8 @@ if ($patch.Length -eq 0)
             Write-Host $zip + " 不存在"
             exit 1
         }
-        Expand-Archive $zip -DestinationPath $PWD
+        # Expand-Archive $zip -DestinationPath $PWD
+        7z e $zip -o"$PWD"
         Write-Host $LASTEXITCODE
         # if ($LASTEXITCODE -ne 0) {
         #     Write-Host "解壓失敗"
