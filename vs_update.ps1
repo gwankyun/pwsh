@@ -1,9 +1,14 @@
 ﻿$buildtools = "..\vs_BuildTools.exe"
 $layout = ".\"
+$cmd = "update"
 
 if ($args.Length -ge 2) {
     $buildtools = $args[0]
     $layout = $args[1]
+}
+
+if ($args.Length -ge 3) {
+    $cmd = $args[2]
 }
 
 if (-not (Test-Path $layout)) {
@@ -39,25 +44,28 @@ function vs_fix($buildtools, $layout) {
     return $r.ExitCode
 }
 
-$ret = vs_update $buildtools $layout
-if ($ret -ne 0) {
-    Write-Output "更新失敗"
-    exit 1
-}
-Write-Output "更新成功"
+if ($cmd -eq "update") {
+    $ret = vs_update $buildtools $layout
+    if ($ret -ne 0) {
+        Write-Output "更新失敗"
+        exit 1
+    }
 
-$ret = vs_clean $buildtools $layout
-if ($ret -ne 0) {
-    Write-Output "刪除失敗"
-    exit 1
+    Write-Output "更新成功"
+    $ret = vs_fix $buildtools $layout
+    if ($ret -ne 0) {
+        Write-Output "驗證失敗"
+        exit 1
+    }
+    Write-Output "驗證成功"
 }
-Write-Output "刪除成功"
-
-$ret = vs_fix $buildtools $layout
-if ($ret -ne 0) {
-    Write-Output "驗證失敗"
-    exit 1
+elseif ($cmd -eq "clean") {
+    $ret = vs_clean $buildtools $layout
+    if ($ret -ne 0) {
+        Write-Output "刪除失敗"
+        exit 1
+    }
+    Write-Output "刪除成功"
 }
-Write-Output "驗證成功"
 
 exit 0
